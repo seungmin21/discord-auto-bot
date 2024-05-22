@@ -2,6 +2,11 @@ import discord
 from discord.ext import tasks
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 import datetime
+import os
+from dotenv import load_dotenv
+
+# .env 파일에서 환경변수를 로드합니다.
+load_dotenv()
 
 # 디스코드 클라이언트 설정
 intents = discord.Intents.default()
@@ -9,13 +14,13 @@ intents.messages = True
 client = discord.Client(intents=intents)
 
 # 봇 토큰
-TOKEN = ''
+TOKEN = os.getenv('DISCORD_BOT_TOKEN')
 
 # 스케줄러 설정
 scheduler = AsyncIOScheduler()
 
 # 타겟 유저 ID와 메시지
-target_user_id =  # 여기에 메시지를 받을 유저의 디스코드 ID를 입력하세요
+target_user_id = int(os.getenv('TARGET_USER_ID'))
 message_content = "테스트"
 
 # 메시지를 보내는 작업을 정의합니다
